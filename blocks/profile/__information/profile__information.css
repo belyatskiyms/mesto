@@ -1,0 +1,9 @@
+.profile__information{
+    width: calc(100% - 125px - 150px - 47px);
+}
+@media (max-width: 880px){
+    .profile__information{
+        width: auto;
+        text-align: center;
+    }
+}
