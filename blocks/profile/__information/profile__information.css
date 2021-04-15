@@ -3,7 +3,8 @@
 }
 @media (max-width: 880px){
     .profile__information{
-        width: auto;
+        width: 280px;
+        margin: auto;
         text-align: center;
     }
 }
