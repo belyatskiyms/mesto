@@ -3,6 +3,9 @@
     font-size: 18px;
     line-height: 22px;
     margin-top: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 @media (max-width: 880px){
     .profile__vocation{
