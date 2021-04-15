@@ -10,6 +10,7 @@
     text-align: center;
     font-weight: 400;
     color: #FFFFFF;
+    margin-top: 45px;
 }
 .popup__button:hover{
     cursor: pointer;
