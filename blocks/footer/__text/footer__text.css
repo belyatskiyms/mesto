@@ -5,7 +5,7 @@
     line-height: 22px;
     color: #545454;
 }
-@media (max-width: 880px){
+@media (max-width: 900px){
     .footer__text{
         font-size: 14px;
         line-height: 17px;
