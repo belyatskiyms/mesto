@@ -1,10 +1,11 @@
 .cards{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 282px);
+    gap: 17px;
+    justify-content: center;
 }
 @media (max-width: 900px){
     .cards{
-        justify-content: space-around;
+        padding: 0 15px 0 15px;
     }
 }

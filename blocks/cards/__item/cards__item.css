@@ -1,13 +1,7 @@
 .cards__item{
-    margin-top: 20px;
     width: 282px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-}
-@media (max-width: 900px){
-    .cards__item{
-        margin-left: 20px;
-        margin-right: 20px;
-    }
+    position: relative;
 }

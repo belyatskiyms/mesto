@@ -1,9 +1,14 @@
 .popup{
-    display: none;
+    visibility: hidden;
+    display: flex;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
     position: fixed;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
 }
