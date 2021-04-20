@@ -8,31 +8,31 @@
     <link rel="stylesheet" href="pages/index.css">
 </head>
 <body class="page">
-    <div class="popup">
+    <div class="popup popup_edit-profile">
         <div class="popup__container">
-            <button type="button" class="popup__close-button" aria-label="Close"></button>
+            <button type="button" class="popup__close-button popup__close-button_edit-profile" aria-label="Close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form action="#" name="profile-form" class="popup__form">
+            <form action="#" name="profile-form" class="popup__form popup__form_edit-profile">
                 <input type="text" name="name" id="name" class="popup__input" value="" placeholder="Имя">
                 <input type="text" name="vocation" id="vocation" class="popup__input" value="" placeholder="О себе">
                 <button type="submit" class="popup__button">Сохранить</button>
             </form>
         </div>
     </div>
-    <div class="popup">
+    <div class="popup popup_add-card">
         <div class="popup__container">
-            <button type="button" class="popup__close-button" aria-label="Close"></button>
+            <button type="button" class="popup__close-button popup__close-button_add-card" aria-label="Close"></button>
             <h2 class="popup__title">Новое место</h2>
-            <form action="#" name="card-form" class="popup__form">
+            <form action="#" name="card-form" class="popup__form popup__form_add-card">
                 <input type="text" name="title" id="title" class="popup__input" value="" placeholder="Название">
                 <input type="text" name="srcImage" id="srcImage" class="popup__input" value="" placeholder="Ссылка на картинку">
                 <button type="submit" class="popup__button">Создать</button>
             </form>
         </div>
     </div>
-    <div class="popup popup_opaque">
+    <div class="popup popup_scan-image">
         <div class="popup__container popup__container_forImage">
-            <button type="button" class="popup__close-button" aria-label="Close"></button>
+            <button type="button" class="popup__close-button popup__close-button_scan-image" aria-label="Close"></button>
             <img src="images/card-img3.png" alt="Изображение карточки" class="popup__card-image" >
             <p class="popup__image-descr">Горный алтай</p>
         </div>
@@ -69,6 +69,7 @@
             </div>
         </div>
     </template>
+    <script src="js/initial-cards.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
