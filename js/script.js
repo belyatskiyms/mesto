@@ -27,29 +27,8 @@ const profileName = document.querySelector('.profile__name');
 const profileVacation = document.querySelector('.profile__vocation');
 const popupCardImage = document.querySelector('.popup__card-image')
 const popupImageDescr = document.querySelector('.popup__image-descr')
-
-//слушатели событий
-buttonProfileEdit.addEventListener('click', () => {
-    inputName.value = profileName.textContent;
-    inputVacation.value = profileVacation.textContent;
-    openPopup(popupEditProfile);
-});
-closeBtnEditProfile.addEventListener('click', () => closePopup(popupEditProfile));
-formEditProfile.addEventListener('submit', submitEditProfileForm); 
-
-buttonAddCard.addEventListener('click', () => openPopup(popupAddCard));  
-closeBtnAddCard.addEventListener('click', () => {
-    closePopup(popupAddCard);
-    resetFormAddCard();
-}); 
-formAddCard.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    addCard(inputSrcImage.value, inputTitle.value);
-    closePopup(popupAddCard);
-    resetFormAddCard();
-});
-
-closeBtnScanImage.addEventListener('click', () => closePopup(popupScanImage)); 
+const cards = document.querySelector('.cards');
+const cardsTemplate = document.querySelector('#card').content;
 
 //Функции
 function openPopup(popup){                                         
@@ -75,22 +54,42 @@ function resetFormAddCard(){
   inputTitle.value = '';
 }
 function addCard(img, title){
-    const cards = document.querySelector('.cards');
     const cardItem = createCard(img, title);
     cards.prepend(cardItem);
 }
 function createCard(img, title){
-    const cardsTemplate = document.querySelector('#card').content;
     const cardItem = cardsTemplate.querySelector('.cards__item').cloneNode(true);
-    cardItem.querySelector('.cards__image').src = img
-    cardItem.querySelector('.cards__image').alt = title
+    const cardItemImage = cardItem.querySelector('.cards__image');
+    cardItemImage.src = img
+    cardItemImage.alt = title  //Заполняет атрибут alt изображения)
+    cardItemImage.addEventListener('click', () => openPopupImage(img, title))
     cardItem.querySelector('.cards__title').textContent = title
-    cardItem.querySelector('.cards__image').addEventListener('click', () => openPopupImage(img, title))
     cardItem.querySelector('.cards__like').addEventListener('click', (e) => e.target.classList.toggle('cards__like_active'));
     cardItem.querySelector('.cards__delete-button').addEventListener('click', (e) => e.target.closest('.cards__item').remove());
     return cardItem
 }
+
+//слушатели событий
+buttonProfileEdit.addEventListener('click', () => {
+  inputName.value = profileName.textContent;
+  inputVacation.value = profileVacation.textContent;
+  openPopup(popupEditProfile);
+});
+closeBtnEditProfile.addEventListener('click', () => closePopup(popupEditProfile));
+formEditProfile.addEventListener('submit', submitEditProfileForm); 
+
+buttonAddCard.addEventListener('click', () => openPopup(popupAddCard));  
+closeBtnAddCard.addEventListener('click', () => {
+  closePopup(popupAddCard);
+  resetFormAddCard();
+}); 
+formAddCard.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  addCard(inputSrcImage.value, inputTitle.value);
+  closePopup(popupAddCard);
+  resetFormAddCard();
+});
+closeBtnScanImage.addEventListener('click', () => closePopup(popupScanImage)); 
+
 //циклы
-for (let key in initialCards){
-  addCard(initialCards[key].link, initialCards[key].name)
-}
+initialCards.forEach(element => addCard(element.link, element.name));
