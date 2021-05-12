@@ -1,0 +1,10 @@
+.popup__button_error{
+    background-color: white;
+    color: #000000;
+    border: 1px solid #000000;
+    opacity: 0.2;
+}
+.popup__button_error:hover{
+    cursor:auto;
+    opacity: 0.2;
+}

@@ -11,7 +11,6 @@ const closeBtnScanImage = document.querySelector('.popup__close-button_scan-imag
 const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupAddCard = document.querySelector('.popup_add-card');
 const popupScanImage = document.querySelector('.popup_scan-image');
-
 //Формы popup
 const formEditProfile = document.querySelector('.popup__form_edit-profile');
 const formAddCard = document.querySelector('.popup__form_add-card');
@@ -39,19 +38,26 @@ function openPopupImage(img, title) {
   popupCardImage.alt = title
   popupImageDescr.textContent = title
   openPopup(popupScanImage);
+  popupScanImage.addEventListener('keydown', checkEventsClosePopup);
 }
-function closePopup(popup){                                                              
-        popup.classList.remove('popup_opened');
+function closePopup(){
+    const popuOpened = document.querySelector('.popup_opened');
+    popuOpened.removeEventListener('keydown', checkEventsClosePopup);
+    popuOpened.classList.remove('popup_opened');                                    
+}
+function checkEventsClosePopup(event){    
+    if (event.target.classList.contains('popup') || event.target.classList.contains('popup__close-button') || event.key === 'Escape'){
+      closePopup()
+      return true // Разрешение на reset
+    }else if(event.target.classList.contains('popup__button')){
+      closePopup()
+      return false
+    }
 }
 function submitEditProfileForm(evt) {
     evt.preventDefault();
     profileName.textContent = inputName.value;
     profileVacation.textContent = inputVacation.value;
-    closePopup(popupEditProfile);
-}
-function resetFormAddCard(){
-  inputSrcImage.value = '';
-  inputTitle.value = '';
 }
 function addCard(img, title){
     const cardItem = createCard(img, title);
@@ -72,24 +78,35 @@ function createCard(img, title){
 //слушатели событий
 buttonProfileEdit.addEventListener('click', () => {
   inputName.value = profileName.textContent;
-  inputVacation.value = profileVacation.textContent;
+  inputVacation.value = profileVacation.textContent
+  enableValidation();
   openPopup(popupEditProfile);
+  popupEditProfile.addEventListener('keydown', checkEventsClosePopup);
 });
-closeBtnEditProfile.addEventListener('click', () => closePopup(popupEditProfile));
+popupEditProfile.addEventListener('click', (event) => checkEventsClosePopup(event));
 formEditProfile.addEventListener('submit', submitEditProfileForm); 
 
-buttonAddCard.addEventListener('click', () => openPopup(popupAddCard));  
-closeBtnAddCard.addEventListener('click', () => {
-  closePopup(popupAddCard);
-  resetFormAddCard();
+buttonAddCard.addEventListener('click', () => {
+  enableValidation()
+  openPopup(popupAddCard)
+  popupAddCard.addEventListener('keydown', checkEventsClosePopup);
+}); 
+popupAddCard.addEventListener('click', (event) => {
+  if(checkEventsClosePopup(event)){
+    formAddCard.reset()
+  }
 }); 
 formAddCard.addEventListener('submit', (evt) => {
   evt.preventDefault();
   addCard(inputSrcImage.value, inputTitle.value);
-  closePopup(popupAddCard);
-  resetFormAddCard();
+  formAddCard.reset()
 });
-closeBtnScanImage.addEventListener('click', () => closePopup(popupScanImage)); 
+popupScanImage.addEventListener('click', (event) => checkEventsClosePopup(event)); 
 
 //циклы
 initialCards.forEach(element => addCard(element.link, element.name));
+
+
+
+
+
