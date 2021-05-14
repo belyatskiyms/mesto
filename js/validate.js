@@ -6,7 +6,7 @@ const settings = {
   inputErrorClass: 'popup__input_error',
   errorClass: 'popup__input-error_active'
 }
-function enableValidation(){
+function enableValidation(settings){   // Подскажите пожалуйста, для чего мы передаем объект настроек в функцию
   const formList = Array.from(document.querySelectorAll(settings.formSelector))
   formList.forEach((formItem)=>{
     setInputValidation(formItem, settings.inputSelector, settings.submitButtonSelector, settings.inactiveButtonClass, settings.inputErrorClass, settings.errorClass)
@@ -73,4 +73,4 @@ function resetFormValidation(popup){
   const buttonError = popup.querySelector(settings.submitButtonSelector)
   checkButtonError(popupInputList, buttonError, settings.inactiveButtonClass)
 }
-enableValidation();
+enableValidation(settings);
