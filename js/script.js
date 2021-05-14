@@ -32,7 +32,12 @@ const cardsTemplate = document.querySelector('#card').content;
 //Функции
 function openPopup(popup){                                         
   popup.classList.add('popup_opened');  
-  window.addEventListener('keydown', checkEventsClosePopup);
+  window.addEventListener('keydown', checkKeyDownEscape);
+}
+function openPopupAddCard() {
+  formAddCard.reset();
+  resetFormValidation(popupAddCard)
+  openPopup(popupAddCard)
 }
 function openPopupImage(img, title) {
   popupCardImage.src = img
@@ -40,18 +45,21 @@ function openPopupImage(img, title) {
   popupImageDescr.textContent = title
   openPopup(popupScanImage);
 }
-function closePopup(popuOpened){
-      popuOpened.classList.remove('popup_opened'); 
-      window.removeEventListener('keydown', checkEventsClosePopup); 
-    
+function closePopup(){  
+    const popupOpened = document.querySelector('.popup_opened'); 
+    if(popupOpened !== null){
+      popupOpened.classList.remove('popup_opened');
+      window.removeEventListener('keydown', checkKeyDownEscape);
+    } 
 }
-function checkEventsClosePopup(event){  
-    const popuOpened = document.querySelector('.popup_opened');  
-    if ((popuOpened !== null) && (event.target.classList.contains('popup') || event.target.classList.contains('popup__close-button') || event.key === 'Escape' || event.target.classList.contains('popup__button'))){
-      closePopup(popuOpened)
-      if(!(event.target.classList.contains('popup__button')) && popuOpened.classList.contains('popup_add-card')){
-        formAddCard.reset()
-      }
+function checkEventsClosePopup(event){ 
+    if (event.target.classList.contains('popup') || event.target.classList.contains('popup__close-button') || event.target.classList.contains('popup__button')){
+      closePopup()
+    }
+}
+function checkKeyDownEscape(event){
+    if(event.key === "Escape"){
+      closePopup()
     }
 }
 function submitEditProfileForm(evt) {
@@ -79,16 +87,15 @@ function createCard(img, title){
 buttonProfileEdit.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputVacation.value = profileVacation.textContent
-  enableValidation();
+  resetFormValidation(popupEditProfile)
   openPopup(popupEditProfile);
 });
 popupEditProfile.addEventListener('click', (event) => checkEventsClosePopup(event));
 formEditProfile.addEventListener('submit', submitEditProfileForm); 
-
 buttonAddCard.addEventListener('click', () => {
-  enableValidation()
-  openPopup(popupAddCard)
+  openPopupAddCard()
 }); 
+
 popupAddCard.addEventListener('click', (event) => {
   checkEventsClosePopup(event)
 }); 
