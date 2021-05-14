@@ -103,7 +103,6 @@ formAddCard.addEventListener('submit', (evt) => {
   evt.preventDefault();
   addCard(inputSrcImage.value, inputTitle.value);
   checkEventsClosePopup(evt)
-  formAddCard.reset()
 });
 popupScanImage.addEventListener('click', (event) => checkEventsClosePopup(event)); 
 
