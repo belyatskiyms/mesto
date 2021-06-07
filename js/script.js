@@ -35,10 +35,10 @@ const settings = {
   errorClass: 'popup__input-error_active'
 }
 
-const formValidatorEditProfile = new FormValidator(settings, popupEditProfile)
-const formValidatorAddCard = new FormValidator(settings, popupAddCard)
-formValidatorEditProfile.enableValidation()
-formValidatorAddCard.enableValidation()
+const formValidatorEditProfile = new FormValidator(settings, formEditProfile)
+const formValidatorAddCard = new FormValidator(settings,formAddCard)
+formValidatorEditProfile.setInputValidation()
+formValidatorAddCard.setInputValidation()
 
 
 //Функции
@@ -74,7 +74,9 @@ function submitEditProfileForm(evt) {
     profileName.textContent = inputName.value;
     profileVacation.textContent = inputVacation.value;
 }
-
+function addCard(card){
+  cards.prepend(card.createCard());
+}
 //слушатели событий
 buttonProfileEdit.addEventListener('click', () => {
   inputName.value = profileName.textContent;
@@ -97,8 +99,8 @@ formAddCard.addEventListener('submit', (evt) => {
     name: inputTitle.value,
     link: inputSrcImage.value
   }
-  const card = new Card(newCardData, '#card', cards)
-  card.addCard()
+  const card = new Card(newCardData, '#card')
+  addCard(card)
   checkEventsClosePopup(evt)
 });
 
@@ -107,7 +109,6 @@ popupScanImage.addEventListener('click', (event) => checkEventsClosePopup(event)
 
 //циклы
 initialCards.forEach(element => {const card = new Card(element, '#card', cards)
-card.addCard()});
-
+addCard(card)});
 
 export {openPopup, popupScanImage}
